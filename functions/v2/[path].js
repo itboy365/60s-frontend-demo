@@ -1,5 +1,5 @@
 // functions/v2/[path].js
-const ORIGIN_API = 'http://api.wvip.top';
+const ORIGIN_API = 'https://api.wvip.top';
 
 export async function onRequest(context) {
   const { request, env, params } = context;
