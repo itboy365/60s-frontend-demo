@@ -31,7 +31,7 @@ export async function onRequest({ request, params, env }) {
   }
 
   // 缓存不存在或已过期，请求源站（使用 HTTP，因为您的源站 HTTP 工作正常）
-  const target = `http://api.wvip.top/v2/${path}${search}`;
+  const target = `https://api.wvip.top/v2/${path}${search}`;
   const response = await fetch(target);
   const data = await response.text();
 
