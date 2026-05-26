@@ -1,1 +1,11 @@
-
+{
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "function": {
+        "name": "api-handler",
+        "path": "edge-functions/api/[[default]].js"
+      }
+    }
+  ]
+}
