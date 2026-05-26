@@ -1,17 +1,20 @@
-export async function onRequest({ request, params, env }) {
-  try {
-    const path = params.path;
-    // 1. 检查 KV 是否绑定
-    if (!env.MY_KV) {
-      return new Response(JSON.stringify({ error: 'KV not bound' }), { status: 500 });
+// Pages Functions 终极版 - 无 KV，纯代理转发
+export async function onRequest({ request, params }) {
+  const path = params.path;
+  const url = new URL(request.url);
+  const target = `http://api.wvip.top/v2/${path}${url.search}`;
+
+  const response = await fetch(target, {
+    headers: {
+      'Host': 'api.wvip.top',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36',
+      'Accept': 'application/json, text/plain, */*'
     }
-    // 2. 尝试写入测试数据
-    await env.MY_KV.put('test', 'ok');
-    // 3. 尝试读取测试数据
-    const test = await env.MY_KV.get('test');
-    // 4. 返回成功信息
-    return new Response(JSON.stringify({ bound: true, test: test }), { status: 200 });
-  } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
-  }
+  });
+
+  const data = await response.text();
+  return new Response(data, {
+    status: response.status,
+    headers: { 'Content-Type': 'application/json' }
+  });
 }
