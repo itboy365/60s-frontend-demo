@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -74,7 +74,7 @@
     </footer>
 
     <script>
-        const API_BASE = '';
+        const API_BASE = 'https://api.wvip.top';
 
         const dataSources = [
             { id: 'moyu',     name: '摸鱼日报',         url: '/v2/moyu',           type: 'moyu',    icon: '🐟', color: 'bg-cyan-500', refreshable: false },
@@ -85,7 +85,7 @@
             { id: 'hitokoto', name: '一言',             url: '/v2/hitokoto',       type: 'quote',   icon: '💬', color: 'bg-purple-500', refreshable: false }
         ];
 
-        let currentOilRegion = '北京';
+let currentOilRegion = '北京';
         const abortControllers = new Map();
         const REFRESH_INTERVAL = 10 * 60 * 1000;
 
